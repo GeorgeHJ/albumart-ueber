@@ -1,4 +1,4 @@
-# albumart-ueber
+# albumart-üeber
 A fun little bash project.
 
 ## Dependencies
