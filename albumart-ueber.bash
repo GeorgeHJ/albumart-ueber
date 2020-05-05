@@ -13,6 +13,8 @@ height=32
 x=0
 y=0
 
+# shellcheck disable=SC2006
+# shellcheck disable=SC1090
 source "`ueberzug library`"
 
 function mpd_check(){
@@ -69,6 +71,7 @@ function check_old(){
 }
 
 function ueber_art(){
+	# shellcheck disable=SC2102
 	# Declare the image details, time it with the check_old function, pipe it to ImageLayer
 	{	ImageLayer::add [identifier]="album_art" [x]="$x" [y]="$y" [width]="$width" [height]="$height" [path]="$filename"
 		check_old
@@ -76,6 +79,7 @@ function ueber_art(){
 }
 
 function clear_art(){
+	# shellcheck disable=SC2102
 	{	ImageLayer::remove [identifier]="album_art"
 	} | ImageLayer
 }
