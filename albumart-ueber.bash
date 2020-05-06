@@ -13,23 +13,20 @@ height=32
 x=0
 y=0
 
-# shellcheck disable=SC2006
 # shellcheck disable=SC1090
-source "`ueberzug library`"
+source "$(ueberzug library)"
 
-function mpd_check(){
+function mpd_check() {
 	# wait until mpd is running
-	while true;
-	do
+	while true; do
 		sleep 1
-		if mpc -q 2</dev/null;
-		then
+		if mpc -q 2</dev/null; then
 			break
 		fi
 	done
 }
 
-function art_filename(){
+function art_filename() {
 	# use mpc to find the path of the currently playing album's artwork
 	local CURRENT_FILE
 	local CURRENT_DIR
@@ -57,30 +54,30 @@ function update_art() {
 	art_filename
 }
 
-function check_old(){
+function check_old() {
 	# check to see if the filename has changed
-	while true;
-	do
+	while true; do
 		mpc idle player update >/dev/null
 		update_art
-		if [ "$old_filename" != "$filename" ]
-		then
+		if [ "$old_filename" != "$filename" ]; then
 			break && old_filename=$filename
 		fi
 	done
 }
 
-function ueber_art(){
+function ueber_art() {
 	# shellcheck disable=SC2102
 	# Declare the image details, time it with the check_old function, pipe it to ImageLayer
-	{	ImageLayer::add [identifier]="album_art" [x]="$x" [y]="$y" [width]="$width" [height]="$height" [path]="$filename"
+	{
+		ImageLayer::add [identifier]="album_art" [x]="$x" [y]="$y" [width]="$width" [height]="$height" [path]="$filename"
 		check_old
 	} | ImageLayer
 }
 
-function clear_art(){
+function clear_art() {
 	# shellcheck disable=SC2102
-	{	ImageLayer::remove [identifier]="album_art"
+	{
+		ImageLayer::remove [identifier]="album_art"
 	} | ImageLayer
 }
 
@@ -91,7 +88,7 @@ function finish() {
 	exit 0
 }
 
-function main(){
+function main() {
 	tput civis # hide the cursor
 	trap finish 2
 	# Main Loop
