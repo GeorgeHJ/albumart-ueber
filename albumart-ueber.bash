@@ -3,8 +3,6 @@
 # From this reddit thread: https://www.reddit.com/r/unixporn/comments/3q4y1m/openbox_music_now_with_tmux_and_album_art/
 # Replacing W3M with Ueberzug
 MUSIC_DIR="/home/george/Music"
-filename=""
-old_filename=""
 
 #default dimensions
 width=32
