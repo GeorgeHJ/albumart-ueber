@@ -27,17 +27,17 @@ mpd_check() {
 
 art_filename() {
 	# use mpc to find the path of the currently playing album's artwork
-	local CURRENT_FILE
-	local CURRENT_DIR
-	CURRENT_FILE=$(mpc current -f "%file%")
-	CURRENT_DIR=$(dirname "$CURRENT_FILE")
+	local current_file
+	local current_dir
+	current_file=$(mpc current -f "%file%")
+	current_dir=$(dirname "$current_file")
 
-	if [ -n "$CURRENT_FILE" ]; then
-		filename=$(find $MUSIC_DIR/"$CURRENT_DIR" -name "*[Ff]ront*[png|jpg|bmp]")
+	if [ -n "$current_file" ]; then
+		filename=$(find $MUSIC_DIR/"$current_dir" -name "*[Ff]ront*[png|jpg|bmp]")
 		if [ -z "$filename" ]; then
-			filename=$(find $MUSIC_DIR/"$CURRENT_DIR" -name "*[Cc]over*[png|jpg|bmp]")
+			filename=$(find $MUSIC_DIR/"$current_dir" -name "*[Cc]over*[png|jpg|bmp]")
 			if [ -z "$filename" ]; then
-				filename=$(find $MUSIC_DIR/"$CURRENT_DIR" -name "*[Ff]older*[png|jpg|bmp]")
+				filename=$(find $MUSIC_DIR/"$current_dir" -name "*[Ff]older*[png|jpg|bmp]")
 			fi
 		fi
 
