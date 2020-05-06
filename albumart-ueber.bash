@@ -2,7 +2,6 @@
 # A Script to Display Album Art in a TMUX pane
 # From this reddit thread: https://www.reddit.com/r/unixporn/comments/3q4y1m/openbox_music_now_with_tmux_and_album_art/
 # Replacing W3M with Ueberzug
-MPC="mpc"
 MUSIC_DIR="/home/george/Music"
 filename=""
 old_filename=""
@@ -30,7 +29,7 @@ art_filename() {
 	# use mpc to find the path of the currently playing album's artwork
 	local CURRENT_FILE
 	local CURRENT_DIR
-	CURRENT_FILE=$($MPC current -f "%file%")
+	CURRENT_FILE=$(mpc current -f "%file%")
 	CURRENT_DIR=$(dirname "$CURRENT_FILE")
 
 	if [ -n "$CURRENT_FILE" ]; then
