@@ -2,7 +2,7 @@
 # A Script to Display Album Art in a TMUX pane
 # From this reddit thread: https://www.reddit.com/r/unixporn/comments/3q4y1m/openbox_music_now_with_tmux_and_album_art/
 # Replacing W3M with Ueberzug
-MUSIC_DIR="/home/george/Music"
+music_dir="/home/george/Music"
 
 #default dimensions
 width=32
@@ -31,11 +31,11 @@ art_filename() {
 	current_dir=$(dirname "$current_file")
 
 	if [ -n "$current_file" ]; then
-		filename=$(find $MUSIC_DIR/"$current_dir" -name "*[Ff]ront*[png|jpg|bmp]")
+		filename=$(find $music_dir/"$current_dir" -name "*[Ff]ront*[png|jpg|bmp]")
 		if [ -z "$filename" ]; then
-			filename=$(find $MUSIC_DIR/"$current_dir" -name "*[Cc]over*[png|jpg|bmp]")
+			filename=$(find $music_dir/"$current_dir" -name "*[Cc]over*[png|jpg|bmp]")
 			if [ -z "$filename" ]; then
-				filename=$(find $MUSIC_DIR/"$current_dir" -name "*[Ff]older*[png|jpg|bmp]")
+				filename=$(find $music_dir/"$current_dir" -name "*[Ff]older*[png|jpg|bmp]")
 			fi
 		fi
 
