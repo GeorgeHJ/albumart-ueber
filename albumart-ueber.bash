@@ -33,16 +33,16 @@ art_filename() {
 	CURRENT_FILE=$($MPC current -f "%file%")
 	CURRENT_DIR=$(dirname "$CURRENT_FILE")
 
-	if [[ -n $CURRENT_FILE ]]; then
+	if [ -n "$CURRENT_FILE" ]; then
 		filename=$(find $MUSIC_DIR/"$CURRENT_DIR" -name "*[Ff]ront*[png|jpg|bmp]")
-		if [[ -z $filename ]]; then
+		if [ -z "$filename" ]; then
 			filename=$(find $MUSIC_DIR/"$CURRENT_DIR" -name "*[Cc]over*[png|jpg|bmp]")
-			if [[ -z $filename ]]; then
+			if [ -z "$filename" ]; then
 				filename=$(find $MUSIC_DIR/"$CURRENT_DIR" -name "*[Ff]older*[png|jpg|bmp]")
 			fi
 		fi
 
-		if [[ -z $filename ]]; then
+		if [ -z "$filename" ]; then
 			filename="/home/george/Pictures/no_art.png"
 		fi
 	fi
