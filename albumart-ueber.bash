@@ -1,7 +1,5 @@
 #!/bin/bash
 # A Script to Display Album Art in a TMUX pane
-# From this reddit thread: https://www.reddit.com/r/unixporn/comments/3q4y1m/openbox_music_now_with_tmux_and_album_art/
-# Replacing W3M with Ueberzug
 music_dir="/home/george/Music"
 
 #default dimensions
