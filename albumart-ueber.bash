@@ -16,10 +16,10 @@ source "$(ueberzug library)"
 mpd_check() {
 	# wait until mpd is running
 	while true; do
-		sleep 1
 		if mpc -q 2</dev/null; then
 			break
 		fi
+		sleep 1
 	done
 }
 
