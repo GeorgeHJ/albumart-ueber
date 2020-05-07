@@ -17,6 +17,13 @@ I particularly credit these two redditors for inspiring this project:
 * [u/drunkangel](https://www.reddit.com/user/drunkangel/) in this [comment](https://www.reddit.com/r/unixporn/comments/3q4y1m/openbox_music_now_with_tmux_and_album_art/cwdld2t/) — who suggested pathfinding logic I still use in a modified form
 
 ## How to use
+### Steps required
+1. Obtain the script
+2. Make sure that you have `ueberzug` installed
+3. Make sure the script is executable
+4. Play some music in `mpd`
+5. Execute the script
+
 ### Currently tested terminals
 * [Alacritty](https://github.com/alacritty/alacritty)
 * Xfce4-terminal
