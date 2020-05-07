@@ -1,5 +1,7 @@
 # albumart-üeber
 A fun little bash project.
+![screenshot](screenshots/arps.png)
+*Pictured album: Arps by Chad Crouch. [Music](https://www.freemusicarchive.org/music/Chad_Crouch/Arps), Licence: [Attribution-NonCommercial 3.0 Unported (CC BY-NC 3.0)](https://creativecommons.org/licenses/by-nc/3.0/)*
 
 ## Rationale
 I was inspired by reddit [thread](https://www.reddit.com/r/unixporn/comments/3q4y1m/openbox_music_now_with_tmux_and_album_art/) but I quickly realised I could have something more robust if I used überzug instead of w3m.
