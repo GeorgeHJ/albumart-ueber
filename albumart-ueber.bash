@@ -25,7 +25,7 @@ main() {
 
 finish() {
 	# Cleanup steps
-	clear_art
+	ueber_clear
 	tput cnorm # make cursor visible
 	exit 0
 }
@@ -88,7 +88,7 @@ check_old() {
 	done
 }
 
-clear_art() {
+ueber_clear() {
 	# shellcheck disable=SC2102
 	{
 		ImageLayer::remove [identifier]="album_art"
