@@ -1,6 +1,6 @@
 #!/bin/bash
 # A Script to Display Album Art in a TMUX pane
-music_dir="/home/george/Music"
+music_dir="$HOME/Music"
 
 #default dimensions
 width=32
@@ -29,16 +29,16 @@ art_filename() {
 	current_dir=$(dirname "$current_file")
 
 	if [ -n "$current_file" ]; then
-		filename=$(find $music_dir/"$current_dir" -name "*[Ff]ront*[png|jpg|bmp]")
+		filename=$(find "$music_dir"/"$current_dir" -name "*[Ff]ront*[png|jpg|bmp]")
 		if [ -z "$filename" ]; then
-			filename=$(find $music_dir/"$current_dir" -name "*[Cc]over*[png|jpg|bmp]")
+			filename=$(find "$music_dir"/"$current_dir" -name "*[Cc]over*[png|jpg|bmp]")
 			if [ -z "$filename" ]; then
-				filename=$(find $music_dir/"$current_dir" -name "*[Ff]older*[png|jpg|bmp]")
+				filename=$(find "$music_dir"/"$current_dir" -name "*[Ff]older*[png|jpg|bmp]")
 			fi
 		fi
 
 		if [ -z "$filename" ]; then
-			filename="/home/george/Pictures/no_art.png"
+			filename="$HOME/Pictures/no_art.png"
 		fi
 	fi
 }
