@@ -3,6 +3,8 @@ A fun little bash project.
 ![screenshot](screenshots/arps.png)
 *Pictured album: Arps by Chad Crouch. [Music](https://www.freemusicarchive.org/music/Chad_Crouch/Arps), Licence: [Attribution-NonCommercial 3.0 Unported (CC BY-NC 3.0)](https://creativecommons.org/licenses/by-nc/3.0/)*
 
+**Note:** in line with Überzug which this project uses as a library, this is licensed under GPLv3.
+
 ## Rationale
 I was inspired by reddit [thread](https://www.reddit.com/r/unixporn/comments/3q4y1m/openbox_music_now_with_tmux_and_album_art/) but I quickly realised I could have something more robust if I used überzug instead of w3m.
 
@@ -21,6 +23,7 @@ I particularly credit these two redditors for inspiring this project:
 
 ## Dependencies
 * `mpd` — the music player
+* `mpc` — a utility for communicating with `mpd` and checking its state
 * `ueberzug` — a library for viewing images in the terminal
 * `bash` — the shell for this project, mandated by `ueberzug`
 
@@ -28,3 +31,7 @@ I particularly credit these two redditors for inspiring this project:
 * [ ] Add screenshots to the repo
 * [ ] Code cleanup
 * [ ] Remove hardcoded paths
+
+## See also
+* [Üeberzug](https://github.com/seebye/ueberzug)
+* [Mpd](https://www.musicpd.org/)
