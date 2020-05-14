@@ -54,11 +54,11 @@ art_filename() {
 	current_dir=$(dirname "$current_file")
 
 	if [ -n "$current_file" ]; then
-		filename=$(find "$music_dir"/"$current_dir" -name "*[Ff]ront*[png|jpg|bmp]")
+		filename=$(find "$music_dir"/"$current_dir" -name "*[Ff]ront*[png|jpg|bmp]" | head -1)
 		if [ -z "$filename" ]; then
-			filename=$(find "$music_dir"/"$current_dir" -name "*[Cc]over*[png|jpg|bmp]")
+			filename=$(find "$music_dir"/"$current_dir" -name "*[Cc]over*[png|jpg|bmp]" | head -1)
 			if [ -z "$filename" ]; then
-				filename=$(find "$music_dir"/"$current_dir" -name "*[Ff]older*[png|jpg|bmp]")
+				filename=$(find "$music_dir"/"$current_dir" -name "*[Ff]older*[png|jpg|bmp]" | head -1)
 			fi
 		fi
 
