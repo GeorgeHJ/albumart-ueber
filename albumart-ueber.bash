@@ -16,6 +16,7 @@ main() {
 	trap finish 2
 	# Main Loop
 	while true; do
+		tmux_client_check
 		mpd_check
 		update_art
 		clear
@@ -28,6 +29,16 @@ finish() {
 	ueber_clear
 	tput cnorm # make cursor visible
 	exit 0
+}
+
+tmux_client_check() {
+	# If in a tmux session, make sure there is a client before moving on
+	if [ "$TERM" == "tmux-256color" ];then
+	until tmux list-clients -t "$(tmux display -p '#{session_name}')" | grep pts;
+	do
+		sleep 1
+	done
+	fi
 }
 
 mpd_check() {
