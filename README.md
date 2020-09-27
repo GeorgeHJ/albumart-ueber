@@ -15,6 +15,7 @@ I like to tinker with `mpd` and this complements my favourite client, `ncmpcpp`.
 I particularly credit these two redditors for inspiring this project:
 * [u/Dylan112](https://www.reddit.com/user/Dylan112/) — also on GitHub: [dylan](https://github.com/dylanaraps), [commit](https://github.com/dylanaraps/dotfiles/commit/c89b7da3d5dba54e36629dce0ab792a61fc575ec)
 * [u/drunkangel](https://www.reddit.com/user/drunkangel/) in this [comment](https://www.reddit.com/r/unixporn/comments/3q4y1m/openbox_music_now_with_tmux_and_album_art/cwdld2t/) — who suggested path-finding logic I still use in a modified form
+* [kunst](https://github.com/sdushantha/kunst) — I figured out my approach to extracting images with help from the source
 
 ## How to use
 ### Steps required
@@ -35,6 +36,7 @@ I particularly credit these two redditors for inspiring this project:
 * `mpc` — a utility for communicating with `mpd` and checking its state
 * `ueberzug` — a library for viewing images in the terminal
 * `bash` — the shell for this project, mandated by `ueberzug`
+* `ffmpeg` — used for extracting images from music files, probably present as a dependency `mpd`
 
 ## To-Dos
 * [x] Add screenshots to the repo
