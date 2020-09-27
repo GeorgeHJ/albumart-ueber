@@ -66,6 +66,7 @@ art_filename() {
 	local current_file
 	local current_dir
 	local tmpimgfile
+	local tmpimgfile_old
 	current_file=$(mpc current -f "%file%")
 	current_dir=$(dirname "$current_file")
 
@@ -83,10 +84,13 @@ art_filename() {
 		if [ -z "$filename" ]; then
 			tmpimgfile=$(mktemp --suffix=.jpg)
 			ffmpeg -i "$music_dir"/"$current_file" "$tmpimgfile" -y
-			if ! cmp -s "$filename" "$tmpimgfile";then
+			if ! cmp -s "$filename" "$tmpimgfile"; then
 				filename=$tmpimgfile
 			fi
+
+			find /tmp -name "tmp.*.jpg" 2>/dev/null | grep -v "$filename"| xargs -r rm
 		fi
+
 		# Finally, if no art can be found then fallback to a placeholder image
 		if [ -z "$filename" ]  || [ ! -s "$filename" ]; then
 			filename="$HOME/Pictures/no_art.png"
