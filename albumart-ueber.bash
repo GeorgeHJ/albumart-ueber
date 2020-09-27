@@ -61,10 +61,12 @@ art_filename() {
 	# use mpc to find the path of the currently playing album's artwork
 	local current_file
 	local current_dir
+	local tmpimgfile
 	current_file=$(mpc current -f "%file%")
 	current_dir=$(dirname "$current_file")
 
 	if [ -n "$current_file" ]; then
+		# Try finding artwork in the album directory
 		filename=$(find "$music_dir"/"$current_dir" -name "*[Ff]ront*[png|jpg|bmp]" | head -1)
 		if [ -z "$filename" ]; then
 			filename=$(find "$music_dir"/"$current_dir" -name "*[Cc]over*[png|jpg|bmp]" | head -1)
@@ -73,6 +75,13 @@ art_filename() {
 			fi
 		fi
 
+		# Otherwise, try to extract artwork from the music file
+		if [ -z "$filename" ]; then
+			tmpimgfile=$(mktemp --suffix=.jpg)
+			ffmpeg -i "$music_dir"/"$current_file" "$tmpimgfile" -y
+			filename=$tmpimgfile
+		fi
+		# Finally, if no art can be found then fallback to a placeholder image
 		if [ -z "$filename" ]; then
 			filename="$HOME/Pictures/no_art.png"
 		fi
