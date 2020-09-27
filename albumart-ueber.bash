@@ -24,10 +24,15 @@ main() {
 	done 2>/dev/null
 }
 
+rm_tmpimgfiles() {
+	find /tmp -name "tmp.*.jpg" -delete 2>/dev/null
+}
+
 finish() {
 	# Cleanup steps
 	ueber_clear
 	tput cnorm # make cursor visible
+	rm_tmpimgfiles
 	exit 0
 }
 
