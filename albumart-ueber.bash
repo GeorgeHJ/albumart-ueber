@@ -33,11 +33,10 @@ finish() {
 
 tmux_client_check() {
 	# If in a tmux session, make sure there is a client before moving on
-	if [ "$TERM" == "tmux-256color" ];then
-	until tmux list-clients -t "$(tmux display -p '#{session_name}')" | grep pts;
-	do
-		sleep 1
-	done
+	if [ "$TERM" == "tmux-256color" ]; then
+		until tmux list-clients -t "$(tmux display -p '#{session_name}')" | grep pts; do
+			sleep 1
+		done
 	fi
 }
 
@@ -79,10 +78,12 @@ art_filename() {
 		if [ -z "$filename" ]; then
 			tmpimgfile=$(mktemp --suffix=.jpg)
 			ffmpeg -i "$music_dir"/"$current_file" "$tmpimgfile" -y
-			filename=$tmpimgfile
+			if ! cmp -s "$filename" "$tmpimgfile";then
+				filename=$tmpimgfile
+			fi
 		fi
 		# Finally, if no art can be found then fallback to a placeholder image
-		if [ -z "$filename" ]; then
+		if [ -z "$filename" ]  || [ ! -s "$filename" ]; then
 			filename="$HOME/Pictures/no_art.png"
 		fi
 	fi
@@ -98,11 +99,11 @@ ueber_art() {
 }
 
 check_old() {
-	# check to see if the filename has changed
+	# check to see if the file contents has changed
 	while true; do
 		mpc idle player update >/dev/null
 		update_art
-		if [ "$old_filename" != "$filename" ]; then
+		if ! cmp -s "$old_filename" "$filename"; then
 			break && old_filename=$filename
 		fi
 	done
