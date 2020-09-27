@@ -34,7 +34,7 @@ finish() {
 tmux_client_check() {
 	# If in a tmux session, make sure there is a client before moving on
 	if [ "$TERM" == "tmux-256color" ]; then
-		until tmux list-clients -t "$(tmux display -p '#{session_name}')" | grep pts; do
+		until tmux list-clients -t "$(tmux display -p '#{session_name}')" | grep -q pts; do
 			sleep 1
 		done
 	fi
