@@ -8,6 +8,15 @@ height=32
 x=0
 y=0
 
+# size down for smaller screens
+typeset -i hsize
+# we only need the horizontal size here
+hsize=$(xdpyinfo | awk '/dimensions/{print $2}' | cut -f1 -dx)
+if [[ hsize -lt 1920 ]]; then
+	width=22
+	height=22
+fi
+
 # shellcheck disable=SC1090
 source "$(ueberzug library)"
 
