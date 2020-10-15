@@ -75,7 +75,6 @@ art_filename() {
 	local current_file
 	local current_dir
 	local tmpimgfile
-	local tmpimgfile_old
 	current_file=$(mpc current -f "%file%")
 	current_dir=$(dirname "$current_file")
 
