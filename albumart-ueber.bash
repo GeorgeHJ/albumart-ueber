@@ -17,8 +17,6 @@ if [[ hsize -lt 1920 ]]; then
 	height=22
 fi
 
-# shellcheck disable=SC1090
-source "$(ueberzug library)"
 
 main() {
 	tput civis # hide the cursor
@@ -75,7 +73,6 @@ art_filename() {
 	local current_file
 	local current_dir
 	local tmpimgfile
-	local tmpimgfile_old
 	current_file=$(mpc current -f "%file%")
 	current_dir=$(dirname "$current_file")
 
@@ -108,12 +105,12 @@ art_filename() {
 }
 
 ueber_art() {
-	# shellcheck disable=SC2102
 	# Declare the image details, time it with the check_old function, pipe it to ImageLayer
 	{
-		ImageLayer::add [identifier]="album_art" [x]="$x" [y]="$y" [width]="$width" [height]="$height" [path]="$filename"
+		# shellcheck disable=2154
+		declare -Ap add_command=([action]="add" [identifier]="album_art" [x]="$x" [y]="$y" [width]="$width" [height]="$height" [path]="$filename")
 		check_old
-	} | ImageLayer
+	} | ueberzug layer --parser bash
 }
 
 check_old() {
@@ -128,9 +125,9 @@ check_old() {
 }
 
 ueber_clear() {
-	# shellcheck disable=SC2102
 	{
-		ImageLayer::remove [identifier]="album_art"
-	} | ImageLayer
+		# shellcheck disable=2154
+		declare -Ap remove_command=([action]="remove" [identifier]="album_art")
+	} | ueberzug layer --parser bash
 }
 main
