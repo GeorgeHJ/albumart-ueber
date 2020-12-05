@@ -1,5 +1,7 @@
 #!/bin/bash
 # A Script to Display Album Art in a TMUX pane
+
+# This is the music directory scanned by mpd, edit this if you have this set differently
 music_dir="$HOME/Music"
 
 #default dimensions
@@ -32,6 +34,7 @@ main() {
 }
 
 rm_tmpimgfiles() {
+	# Delete image files used when extracting artwork from music files
 	find /tmp -name "tmp.*.jpg" -delete 2>/dev/null
 }
 
