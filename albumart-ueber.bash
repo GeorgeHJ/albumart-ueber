@@ -1,10 +1,11 @@
 #!/bin/bash
 # A Script to Display Album Art in a TMUX pane
 
+# These variables will be read from the command line for testing
 [[ -z "$verbose" ]] && verbose=false
 
 # This is the music directory scanned by mpd, edit this if you have this set differently
-music_dir="$HOME/Music"
+[[ -z "$music_dir" ]] && music_dir="$HOME/Music"
 
 #default dimensions
 width=32
