@@ -1,8 +1,11 @@
 #!/bin/bash
 # A Script to Display Album Art in a TMUX pane
 
+# These variables will be read from the command line for testing
+[[ -z "$verbose" ]] && verbose=false
+
 # This is the music directory scanned by mpd, edit this if you have this set differently
-music_dir="$HOME/Music"
+[[ -z "$music_dir" ]] && music_dir="$HOME/Music"
 
 #default dimensions
 width=32
@@ -28,14 +31,16 @@ main() {
 		tmux_client_check
 		mpd_check
 		update_art
-		clear
+		if [[ "$verbose" == 'false' ]] || [[ "$verbose" == 0 ]];then
+			clear
+		fi
 		ueber_art
-	done 2>/dev/null
+	done
 }
 
 rm_tmpimgfiles() {
 	# Delete image files used when extracting artwork from music files
-	find /tmp -name "tmp.*.jpg" -delete 2>/dev/null
+	find /tmp -name "tmp.*.jpg" -delete
 }
 
 finish() {
@@ -58,7 +63,7 @@ tmux_client_check() {
 mpd_check() {
 	# wait until mpd is running
 	while true; do
-		if mpc -q 2</dev/null; then
+		if mpc -q; then
 			break
 		fi
 		sleep 1
@@ -97,7 +102,7 @@ art_filename() {
 				filename=$tmpimgfile
 			fi
 
-			find /tmp -name "tmp.*.jpg" 2>/dev/null | grep -v "$filename"| xargs -r rm
+			find /tmp -name "tmp.*.jpg" | grep -v "$filename"| xargs -r rm
 		fi
 
 		# Finally, if no art can be found then fallback to a placeholder image
@@ -119,7 +124,7 @@ ueber_art() {
 check_old() {
 	# check to see if the file contents has changed
 	while true; do
-		mpc idle player update >/dev/null
+		mpc idle player update
 		update_art
 		if ! cmp -s "$old_filename" "$filename"; then
 			break && old_filename=$filename
@@ -133,4 +138,8 @@ ueber_clear() {
 		declare -Ap remove_command=([action]="remove" [identifier]="album_art")
 	} | ueberzug layer --parser bash
 }
-main
+if [[ "$verbose" == 'false' ]] || [[ "$verbose" == 0 ]];then
+	main 2> /dev/null
+elif [[ "$verbose" == 'true' ]] || [[ "$verbose" == 1 ]];then
+	main
+fi
