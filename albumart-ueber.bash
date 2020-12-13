@@ -1,6 +1,8 @@
 #!/bin/bash
 # A Script to Display Album Art in a TMUX pane
 
+[[ -z "$verbose" ]] && verbose=false
+
 # This is the music directory scanned by mpd, edit this if you have this set differently
 music_dir="$HOME/Music"
 
@@ -28,7 +30,9 @@ main() {
 		tmux_client_check
 		mpd_check
 		update_art
-		clear
+		if [[ "$verbose" == 'false' ]] || [[ "$verbose" == 0 ]];then
+			clear
+		fi
 		ueber_art
 	done
 }
@@ -133,4 +137,8 @@ ueber_clear() {
 		declare -Ap remove_command=([action]="remove" [identifier]="album_art")
 	} | ueberzug layer --parser bash
 }
-main 2> /dev/null
+if [[ "$verbose" == 'false' ]] || [[ "$verbose" == 0 ]];then
+	main 2> /dev/null
+elif [[ "$verbose" == 'true' ]] || [[ "$verbose" == 1 ]];then
+	main
+fi
