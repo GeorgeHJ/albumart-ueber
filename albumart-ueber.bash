@@ -86,13 +86,7 @@ art_filename() {
 
 	if [ -n "$current_file" ]; then
 		# Try finding artwork in the album directory
-		filename=$(find "$music_dir"/"$current_dir" -name "*[Ff]ront*[png|jpg|bmp]" | head -1)
-		if [ -z "$filename" ]; then
-			filename=$(find "$music_dir"/"$current_dir" -name "*[Cc]over*[png|jpg|bmp]" | head -1)
-			if [ -z "$filename" ]; then
-				filename=$(find "$music_dir"/"$current_dir" -name "*[Ff]older*[png|jpg|bmp]" | head -1)
-			fi
-		fi
+		filename=$(find "$music_dir"/"$current_dir" -iregex '^.*\(front\|cover\|folder\)\.\(jpg\|png\|bmp\)$' | head -1)
 
 		# Otherwise, try to extract artwork from the music file
 		if [ -z "$filename" ]; then
