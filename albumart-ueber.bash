@@ -53,7 +53,7 @@ finish() {
 
 tmux_client_check() {
 	# If in a tmux session, make sure there is a client before moving on
-	if [ "$TERM" == "tmux-256color" ]; then
+	if [[ "$TERM" == "tmux-256color" ]]; then
 		until tmux list-clients -t "$(tmux display -p '#{session_name}')" | grep -q pts; do
 			sleep 1
 		done
@@ -84,12 +84,12 @@ art_filename() {
 	current_file=$(mpc current -f "%file%")
 	current_dir=$(dirname "$current_file")
 
-	if [ -n "$current_file" ]; then
+	if [[ -n "$current_file" ]]; then
 		# Try finding artwork in the album directory
 		filename=$(find "$music_dir"/"$current_dir" -iregex '^.*\(front\|cover\|folder\)\.\(jpg\|png\|bmp\)$' | head -1)
 
 		# Otherwise, try to extract artwork from the music file
-		if [ -z "$filename" ]; then
+		if [[ -z "$filename" ]]; then
 			tmpimgfile=$(mktemp --suffix=.jpg)
 			ffmpeg -i "$music_dir"/"$current_file" "$tmpimgfile" -y
 			if ! cmp -s "$filename" "$tmpimgfile"; then
@@ -100,7 +100,7 @@ art_filename() {
 		fi
 
 		# Finally, if no art can be found then fallback to a placeholder image
-		if [ -z "$filename" ]  || [ ! -s "$filename" ]; then
+		if [[ -z "$filename" ]]  || [[ ! -s "$filename" ]]; then
 			filename="$HOME/Pictures/no_art.png"
 		fi
 	fi
